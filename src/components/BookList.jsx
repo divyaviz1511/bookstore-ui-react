@@ -8,6 +8,13 @@ const BookList = ({books}) => {
         navigate(`/edit/${id}`);
     }
 
+    const handleDelete = (id) => {
+        const confirmation = window.confirm("Are you sure you want to delete this book ? ");
+        if (confirmation) {
+          navigate(`/delete/${id}`);
+        }
+    }
+
     return (
     <div>
       <h4>Book List</h4>
@@ -36,7 +43,7 @@ const BookList = ({books}) => {
               <td>{book.releasedDate}</td>
               <td>
                 <button className="btn btn-sm btn-primary me-2" onClick={() => handleEdit(book.id)}>Edit</button>
-                <button className="btn btn-sm btn-danger" >Delete</button>
+                <button className="btn btn-sm btn-danger" onClick={() => handleDelete(book.id)}>Delete</button>
               </td>
             </tr>
           ))}

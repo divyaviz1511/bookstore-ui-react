@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 import AddBook from './components/AddBook';
 import EditBook from './components/EditBook';
+import DeleteBook from './components/DeleteBook';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path = "/" element={<HomePage/>} />
           <Route path = "/add" element={<AddBook/>} />
           <Route path = "/edit/:id" element={<EditBook/>} />
+          <Route path = "delete/:id" element={<DeleteBook/>}/>
         </Routes>
       </div>
     </div>

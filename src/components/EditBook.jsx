@@ -1,10 +1,11 @@
 import react, {useEffect, useState} from "react";
 import { fetchBookDetailsById, patchBookDetailsById } from "../services/bookServices";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BookForm from "./BookForm";
 
 function EditBook () {
     const {id}= useParams();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
          title : "",
                 author : "",
@@ -38,17 +39,11 @@ function EditBook () {
 
         try {
             await patchBookDetailsById(id, formData);
-            setFormData({
-                title : "",
-                author : "",
-                price: "",
-                quantity: "",
-                language: "",
-                releasedDate: ""
-            });
-            alert("Book Details Updated !");
+            alert("Book updated successfully !");
+            navigate("/");
+
         } catch (error) {
-            console.log("Error updating the book details: ", error);
+            console.error("Error updating the book details: ", error);
         }
     }
 
