@@ -58,3 +58,24 @@ npm install
 
 # 3. Start the React app
 npm start
+```
+
+## Visual Look of Book Inventory
+
+### Book Lists
+<img width="1432" height="339" alt="image" src="https://github.com/user-attachments/assets/5cead881-b8be-4925-9fe9-fe7f9acfae59" />
+
+### Add Book
+<img width="1423" height="515" alt="image" src="https://github.com/user-attachments/assets/3b23e86d-4a9c-46a4-b3ca-f83abc2dbbc6" />
+
+### Edit Book
+<img width="1414" height="500" alt="image" src="https://github.com/user-attachments/assets/d1b31c68-b8f4-4c98-9e9b-37cdded731ad" />
+
+### Delete Book
+<img width="1414" height="500" alt="image" src="https://github.com/user-attachments/assets/a94aa50c-9ed1-40d4-be21-98fe5a08f30e" />
+
+### Search Book
+<img width="1424" height="708" alt="image" src="https://github.com/user-attachments/assets/e1bb87b9-527a-4850-a84a-0d2af66fc12d" />
+
+
+
