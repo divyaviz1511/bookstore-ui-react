@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import AddBook from './components/AddBook';
 import EditBook from './components/EditBook';
 import DeleteBook from './components/DeleteBook';
+import SearchPage from './pages/SearchPage';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path = "/add" element={<AddBook/>} />
           <Route path = "/edit/:id" element={<EditBook/>} />
           <Route path = "delete/:id" element={<DeleteBook/>}/>
+          <Route path = "/search" element={<SearchPage/>} />
         </Routes>
       </div>
     </div>
