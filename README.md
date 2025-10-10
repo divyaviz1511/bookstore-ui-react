@@ -77,5 +77,7 @@ npm start
 ### Search Book
 <img width="1424" height="708" alt="image" src="https://github.com/user-attachments/assets/e1bb87b9-527a-4850-a84a-0d2af66fc12d" />
 
+### Alerts Page
+<img width="1422" height="204" alt="image" src="https://github.com/user-attachments/assets/25b38c14-b40d-4433-aa99-77a0a79c864d" />
 
 
