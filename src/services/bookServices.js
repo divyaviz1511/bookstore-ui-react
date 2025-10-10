@@ -8,3 +8,5 @@ export const fetchBookDetailsById = (id) => axios.get(`${API_URL}/${id}`);
 export const patchBookDetailsById = (id, formData) => axios.patch(`${API_URL}/${id}`, formData);
 export const deleteBookById = (id) => axios.delete(`${API_URL}/${id}`);
 export const getBooksBySearchCriteria = (searchData) => axios.post(API_URL + "/search", searchData);
+export const getAllAlerts = () => axios.get(API_URL + "/alerts");
+export const getAlertsCount = () => axios.get(API_URL + "/alerts/count");

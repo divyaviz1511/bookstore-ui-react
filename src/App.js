@@ -6,9 +6,27 @@ import AddBook from './components/AddBook';
 import EditBook from './components/EditBook';
 import DeleteBook from './components/DeleteBook';
 import SearchPage from './pages/SearchPage';
+import AlertsPage from './pages/AlertsPage';
+import { getAlertsCount } from './services/bookServices';
+import { useEffect, useState } from 'react';
 
 
 function App() {
+  const [count, setCount] = useState([0]);
+  
+  const fetchAlertCount = async() => {
+    try {
+      const response = await getAlertsCount();
+      setCount(response.data);
+    }catch(error) {
+      console.error("Error Fetch Count:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchAlertCount();
+  },[]);
+
   return (
    <div className="container-fluid">
     <div className="row">
@@ -25,7 +43,11 @@ function App() {
             <Link to="/search" className="nav-link">Search Books</Link>
           </li>
           <li className="nav-item">
-            <Link to="/alerts" className="nav-link">Low Stock Alerts</Link>
+            <Link to="/alerts" className="nav-link">Low Stock Alerts {count > 0 && (
+                                <span className="badge bg-danger ms-2">
+                                    {count}
+                                </span>
+                            )}</Link>
           </li>
         </ul>
       </div>
@@ -36,6 +58,7 @@ function App() {
           <Route path = "/edit/:id" element={<EditBook/>} />
           <Route path = "delete/:id" element={<DeleteBook/>}/>
           <Route path = "/search" element={<SearchPage/>} />
+          <Route path = "/alerts" element={<AlertsPage/>}/>
         </Routes>
       </div>
     </div>
