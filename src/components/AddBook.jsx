@@ -1,5 +1,5 @@
 import react, {useState} from "react";
-import { postBookDetails } from "../services/bookServices";
+import { getSuggestedPrice, postBookDetails } from "../services/bookServices";
 import BookForm from "./BookForm";
 
 function AddBook() {
@@ -9,11 +9,35 @@ function AddBook() {
         price: "",
         quantity: "",
         language: "",
-        releasedDate: ""
+        releasedDate: "",
+        genre:"",
+        pageCount:""
     });
+
+    const [suggestedPrice, setSuggestedPrice] = useState();
+
+    const suggestedPriceFromPythonAPI = async() => {
+        try {
+            const getYear = new Date(formData.releasedDate).getFullYear();
+            const response = await getSuggestedPrice({
+                'pageCount': Number(formData.pageCount), 
+                'releasedYear': Number(getYear),
+                'author': formData.author, 
+            });
+            setSuggestedPrice(response.data.suggested_price);
+            setFormData((prev) => ({
+                        ...prev,
+                        price: response.data.suggested_price
+                    }));
+        } catch(error) {
+            console.error("Error while fetching suggested price via api: " , error);
+        }
+
+    }
 
    const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
+        suggestedPriceFromPythonAPI()
    }
 
    const handleSubmit = async(e) => {
@@ -26,7 +50,9 @@ function AddBook() {
                 price: "",
                 quantity: "",
                 language: "",
-                releasedDate: ""
+                releasedDate: "",
+                genre:"",
+                pageCount:""
             });
             alert("Book Added !");
         } catch (error) {
@@ -37,7 +63,7 @@ function AddBook() {
     return (
         <div>
             <h4>Add New Book</h4>
-            <BookForm handleChange={handleChange} handleSubmit={handleSubmit} formData={formData}/>
+            <BookForm handleChange={handleChange} handleSubmit={handleSubmit} formData={formData} suggestedPrice={suggestedPrice}/>
         </div>
     );
 }
