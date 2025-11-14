@@ -9,6 +9,7 @@ import SearchPage from './pages/SearchPage';
 import AlertsPage from './pages/AlertsPage';
 import { getAlertsCount } from './services/bookServices';
 import { useEffect, useState } from 'react';
+import BookDetailedInfo from './components/BookDetailedInfo';
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
           <Route path = "delete/:id" element={<DeleteBook/>}/>
           <Route path = "/search" element={<SearchPage/>} />
           <Route path = "/alerts" element={<AlertsPage/>}/>
+          <Route path = "/book-info/:id" element={<BookDetailedInfo></BookDetailedInfo>}/>
         </Routes>
       </div>
     </div>

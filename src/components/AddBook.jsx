@@ -1,4 +1,5 @@
-import react, {useState} from "react";
+import react, {useState, useMemo, useEffect} from "react";
+import { debounce } from 'lodash';
 import { getSuggestedPrice, postBookDetails } from "../services/bookServices";
 import BookForm from "./BookForm";
 
@@ -16,7 +17,7 @@ function AddBook() {
 
     const [suggestedPrice, setSuggestedPrice] = useState();
 
-    const suggestedPriceFromPythonAPI = async() => {
+    /*const suggestedPriceFromPythonAPI = async() => {
         try {
             const getYear = new Date(formData.releasedDate).getFullYear();
             const response = await getSuggestedPrice({
@@ -33,11 +34,37 @@ function AddBook() {
             console.error("Error while fetching suggested price via api: " , error);
         }
 
-    }
+    }*/
+   const suggestedPriceFromPythonAPI = useMemo(() =>
+      debounce(async (formData) => {
+        if (formData.pageCount && formData.releasedDate && formData.author) {
+            try {
+                const getYear = new Date(formData.releasedDate).getFullYear();
+                const response = await getSuggestedPrice({
+                    'pageCount': Number(formData.pageCount), 
+                    'releasedYear': Number(getYear),
+                    'author': formData.author, 
+                });
+                setSuggestedPrice(response.data.suggested_price);
+                } catch (err) {
+                console.error('Prediction failed:', err.message);
+            }
+        }
+      }, 600),
+    []);
+
+    useEffect(() => {
+        suggestedPriceFromPythonAPI(formData);
+        
+        //Cleanup to prevent memory leaks
+        return () => {
+            suggestedPriceFromPythonAPI.cancel();
+        };
+    },  [formData]);
 
    const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
-        suggestedPriceFromPythonAPI()
+        //suggestedPriceFromPythonAPI()
    }
 
    const handleSubmit = async(e) => {
