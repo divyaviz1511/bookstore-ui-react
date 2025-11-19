@@ -11,4 +11,5 @@ export const deleteBookById = (id) => axios.delete(`${API_URL}/${id}`);
 export const getBooksBySearchCriteria = (searchData) => axios.post(API_URL + "/search", searchData);
 export const getAllAlerts = () => axios.get(API_URL + "/alerts");
 export const getAlertsCount = () => axios.get(API_URL + "/alerts/count");
-export const getSuggestedPrice = (formData) => axios.post(Fast_API_URL + "/predict_price", formData)
+export const getSuggestedPrice = (formData) => axios.post(Fast_API_URL + "/predict_price", formData);
+export const getBooksFromSemanticSearchResults = (searchString) => axios.post(Fast_API_URL + "/semantic_search_books", searchString);

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { getBooksBySearchCriteria } from "../services/bookServices";
+import SemanticSearch from "../components/SemanticSearch";
 
 const SearchPage = () => {
     const [searchData, setSearchData] = useState({
@@ -41,7 +42,12 @@ const SearchPage = () => {
 
     return (
         <div>
-            <h4> Search Books </h4>
+            <h4> Semantic Book Search </h4>
+            <SemanticSearch/>
+
+            <br/>
+            <br/>
+            <h4> Search Books Traditional way </h4>
             <form onSubmit= {submitHandler}>
                 <div className="mb-3">
                     <label>Title </label>
